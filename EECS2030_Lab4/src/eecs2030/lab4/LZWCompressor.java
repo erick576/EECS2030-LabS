@@ -104,32 +104,32 @@ public class LZWCompressor {
 		List<String> single = new ArrayList<>();
 		List<Integer> ret = new ArrayList<>();
 		List<String> copy = new ArrayList<>();
-		String c = this.input.trim();
-		if (c.length() > 0) {
+		String cc = this.input.trim();
+		if (cc.length() > 0) {
 
 			for (String s : this.d.lentries) {
 				copy.add(s);
 			}
 
-			for (int i = 0; i < c.length(); i++) {
+			for (int i = 0; i < cc.length(); i++) {
 				single.add(Character.toString(this.input.charAt(i)));
 			}
-			String W = single.get(0);
+			String w = single.get(0);
 			int j = 0;
-			String WC = "";
+			String wc = "";
 			while (j < single.size() - 1) {
 				j = j + 1;
-				String C = single.get(j);
-				WC = W + C;
-				if (copy.contains(WC)) {
-					W = WC;
+				String c = single.get(j);
+				wc = w + c;
+				if (copy.contains(wc)) {
+					w = wc;
 				} else {
-					ret.add(copy.indexOf(W));
-					copy.add(WC);
-					W = C;
+					ret.add(copy.indexOf(w));
+					copy.add(wc);
+					w = c;
 				}
 			}
-			ret.add(copy.indexOf(W));
+			ret.add(copy.indexOf(w));
 			this.enc = copy;
 			return ret;
 		}
@@ -163,25 +163,25 @@ public class LZWCompressor {
 		for (String s : this.d.lentries) {
 			copy1.add(s);
 		}
-		String PREV = this.enc.get(0);
-		in += PREV;
-		String S = "";
-		String C = "";
+		String prev = this.enc.get(0);
+		in += prev;
+		String s = "";
+		String c = "";
 		int j = 0;
 		while (j < encoded.size() - 1) {
 			j = j + 1;
-			String NEXT = this.enc.get(encoded.get(j));
-			if (copy1.contains(NEXT)) {
-				S = NEXT;
+			String next = this.enc.get(encoded.get(j));
+			if (copy1.contains(next)) {
+				s = next;
 			} else {
-				S = PREV;
-				C = Character.toString(S.charAt(0));
-				S = S + C;
+				s = prev;
+				c = Character.toString(s.charAt(0));
+				s = s + c;
 			}
-			in += S;
-			String ENTRY = PREV + Character.toString(S.charAt(0));
-			copy1.add(ENTRY);
-			PREV = NEXT;
+			in += s;
+			String entry = prev + Character.toString(s.charAt(0));
+			copy1.add(entry);
+			prev = next;
 		}
 		return in;
 	}
