@@ -1,0 +1,18 @@
+
+public class GreaterThan extends Expression {
+
+	GreaterThan(int left, int right) {
+		super(left, right);
+		this.IsInt = false;
+	}
+
+	Object getValue() {
+		/* Your Task */
+		return super.getValue();
+	}
+
+	void evaluate() {
+		/* Your Task */
+		this.value = this.left > this.right;
+	}
+}
