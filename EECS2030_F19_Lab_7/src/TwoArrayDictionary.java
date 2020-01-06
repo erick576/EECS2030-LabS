@@ -24,105 +24,105 @@
  */
 
 public class TwoArrayDictionary implements Dictionary {
-	
+
 	/*
 	 * Use these attributes only to implement the methods.
 	 */
 	int MAX_CAPACITY = 100;
 	int count = 0; // number of entries in dictionary
-	
+
 	String[] words;
 	String[] definitions;
-	
+
 	/*
 	 * Your tasks: declare and implement methods from the Dictionary interface.
 	 */
-	 
+
 	public TwoArrayDictionary() {
-    this.words = new String[100];
-    this.definitions = new String[100];
-    this.count = 0;
+		this.words = new String[100];
+		this.definitions = new String[100];
+		this.count = 0;
 	}
-		
-	
+
 	@Override
 	public int size() {
-    return this.count;
+		return this.count;
 	}
-	
+
 	@Override
 	public boolean isEmpty() {
-	return (this.count == 0);
+		return (this.count == 0);
 	}
-	
+
 	@Override
 	public String getDefinition(String word) throws WordNotInDictionaryException {
-	for(int i = 0; i < this.count; i ++) {
-		if(word.contentEquals(this.words[i])) {
-			return this.definitions[i];
-		}
-	}
-	throw new WordNotInDictionaryException("");
-	}
-	
-	@Override
-	public void insertEntry(String word, String definition) throws WordAlreadyExistsInDictionaryException, DictionaryFullException {
-	if(this.count == 100) {
-		throw new DictionaryFullException("");
-	}
-	for(int i = 0; i < this.count; i ++) {
-		if(word.contentEquals(this.words[i])) {
-			throw new WordAlreadyExistsInDictionaryException("");
-		}
-	}
-	this.words[this.count] = word;
-	this.definitions[this.count] = definition;
-	this.count ++;
-	}
-	@Override
-	public String removeWord(String word) throws WordNotInDictionaryException {
-		for(int i = 0; i < this.count; i ++) {
-			if(word.contentEquals(this.words[i])) {
-			int index = i;
-			String w = this.definitions[index];
-	        this.count --;
-			for(int j = index; j < this.count; j ++) {
-				this.words[j] = this.words[j + 1];
-				this.definitions[j] = this.definitions[j + 1];
-			}
-			this.words[this.count] = null;
-			this.definitions[this.count] = null;
-			return w;
+		for (int i = 0; i < this.count; i++) {
+			if (word.contentEquals(this.words[i])) {
+				return this.definitions[i];
 			}
 		}
 		throw new WordNotInDictionaryException("");
 	}
-	
+
+	@Override
+	public void insertEntry(String word, String definition)
+			throws WordAlreadyExistsInDictionaryException, DictionaryFullException {
+		if (this.count == 100) {
+			throw new DictionaryFullException("");
+		}
+		for (int i = 0; i < this.count; i++) {
+			if (word.contentEquals(this.words[i])) {
+				throw new WordAlreadyExistsInDictionaryException("");
+			}
+		}
+		this.words[this.count] = word;
+		this.definitions[this.count] = definition;
+		this.count++;
+	}
+
+	@Override
+	public String removeWord(String word) throws WordNotInDictionaryException {
+		for (int i = 0; i < this.count; i++) {
+			if (word.contentEquals(this.words[i])) {
+				int index = i;
+				String w = this.definitions[index];
+				this.count--;
+				for (int j = index; j < this.count; j++) {
+					this.words[j] = this.words[j + 1];
+					this.definitions[j] = this.definitions[j + 1];
+				}
+				this.words[this.count] = null;
+				this.definitions[this.count] = null;
+				return w;
+			}
+		}
+		throw new WordNotInDictionaryException("");
+	}
+
 	@Override
 	public String[] getWords() {
 		String[] ans = new String[this.count];
-		for(int i = 0; i < this.count; i ++) {
+		for (int i = 0; i < this.count; i++) {
 			ans[i] = this.words[i];
 		}
-			return ans;
+		return ans;
 	}
-	
+
 	@Override
 	public String[] getDefinitions() {
 		String[] ans = new String[this.count];
-		for(int i = 0; i < this.count; i ++) {
+		for (int i = 0; i < this.count; i++) {
 			ans[i] = this.definitions[i];
 		}
-			return ans;
+		return ans;
 	}
-	
+
 	@Override
 	public WordDefinitionPair[] getEntries() {
 		WordDefinitionPair[] ans = new WordDefinitionPair[this.count];
-		for(int i = 0; i < this.count; i ++) {
+		for (int i = 0; i < this.count; i++) {
 			ans[i] = new WordDefinitionPair(words[i], definitions[i]);
 		}
-			return ans;
+		return ans;
 	}
-	}
-
+}

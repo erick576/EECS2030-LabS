@@ -23,7 +23,7 @@ public class WordDefinitionPair {
 	public void setWord(String word) {
 		this.word = word;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -36,16 +36,16 @@ public class WordDefinitionPair {
 			return false;
 		}
 		WordDefinitionPair other = (WordDefinitionPair) obj;
-		if(this.getWord().contentEquals(other.getWord()) && this.getDefinition().contentEquals(other.getDefinition())) {
+		if (this.getWord().contentEquals(other.getWord())
+				&& this.getDefinition().contentEquals(other.getDefinition())) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.word + ": " + this.definition;
 	}
-	
-	
+
 }

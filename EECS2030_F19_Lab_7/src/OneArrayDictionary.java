@@ -25,97 +25,98 @@ public class OneArrayDictionary implements Dictionary {
 	int MAX_CAPACITY = 100;
 	int count = 0;
 	WordDefinitionPair[] dict;
-	
+
 	/*
 	 * Your tasks: declare and implement methods from the Dictionary interface.
 	 */
 	public OneArrayDictionary() {
-	this.dict = new WordDefinitionPair[100];
-	this.count = 0;
+		this.dict = new WordDefinitionPair[100];
+		this.count = 0;
 	}
-	
+
 	public OneArrayDictionary(int count, WordDefinitionPair[] dict) {
 		this.count = count;
 		this.dict = dict;
 	}
-	
-	
+
 	@Override
 	public int size() {
 		return this.count;
 	}
-	
+
 	@Override
 	public boolean isEmpty() {
 		return (this.count == 0);
 	}
-	
+
 	@Override
 	public String getDefinition(String word) throws WordNotInDictionaryException {
-	for(int i = 0; i < this.count; i ++) {
-		if(word.contentEquals(this.dict[i].getWord())) {
-			return this.dict[i].getDefinition();		}
-	}	
-    throw new WordNotInDictionaryException("");
-	}
-	
-	@Override
-	public void insertEntry(String word, String definition) throws WordAlreadyExistsInDictionaryException, DictionaryFullException {
-	if(this.count == 100) {
-		throw new DictionaryFullException("");
-	}
-	for(int i = 0; i < this.count; i ++) {
-		if(word.contentEquals(this.dict[i].getWord())) {
-		throw new  WordAlreadyExistsInDictionaryException("");			
+		for (int i = 0; i < this.count; i++) {
+			if (word.contentEquals(this.dict[i].getWord())) {
+				return this.dict[i].getDefinition();
+			}
 		}
+		throw new WordNotInDictionaryException("");
 	}
-	WordDefinitionPair w = new WordDefinitionPair(word, definition);
-	this.dict[this.count] = w;
-	this.count ++;
+
+	@Override
+	public void insertEntry(String word, String definition)
+			throws WordAlreadyExistsInDictionaryException, DictionaryFullException {
+		if (this.count == 100) {
+			throw new DictionaryFullException("");
+		}
+		for (int i = 0; i < this.count; i++) {
+			if (word.contentEquals(this.dict[i].getWord())) {
+				throw new WordAlreadyExistsInDictionaryException("");
+			}
+		}
+		WordDefinitionPair w = new WordDefinitionPair(word, definition);
+		this.dict[this.count] = w;
+		this.count++;
 	}
-	
+
 	@Override
 	public String removeWord(String word) throws WordNotInDictionaryException {
-	for(int i = 0; i < this.count; i ++) {
-		if(word.contentEquals(this.dict[i].getWord())) {
-		int index = i;
-		String w = this.dict[index].getDefinition();
-        this.count --;
-		for(int j = index; j < this.count; j ++) {
-			this.dict[j] = this.dict[j + 1];
+		for (int i = 0; i < this.count; i++) {
+			if (word.contentEquals(this.dict[i].getWord())) {
+				int index = i;
+				String w = this.dict[index].getDefinition();
+				this.count--;
+				for (int j = index; j < this.count; j++) {
+					this.dict[j] = this.dict[j + 1];
+				}
+				this.dict[this.count] = null;
+				return w;
+			}
 		}
-		this.dict[this.count] = null;
-		return w;
-		}
+		throw new WordNotInDictionaryException("");
 	}
-	throw new WordNotInDictionaryException("");
-	}
-	
+
 	@Override
 	public String[] getWords() {
-	String[] ans = new String[this.count];
-	for(int i = 0; i < this.count; i ++) {
-		ans[i] = this.dict[i].getWord();
-	}
+		String[] ans = new String[this.count];
+		for (int i = 0; i < this.count; i++) {
+			ans[i] = this.dict[i].getWord();
+		}
 		return ans;
 	}
-	
+
 	@Override
 	public String[] getDefinitions() {
 		String[] ans = new String[this.count];
-		for(int i = 0; i < this.count; i ++) {
+		for (int i = 0; i < this.count; i++) {
 			ans[i] = this.dict[i].getDefinition();
 		}
-			return ans;
+		return ans;
 	}
-	
+
 	@Override
 	public WordDefinitionPair[] getEntries() {
 		WordDefinitionPair[] ans = new WordDefinitionPair[this.count];
-		for(int i = 0; i < this.count; i ++) {
+		for (int i = 0; i < this.count; i++) {
 			ans[i] = this.dict[i];
 		}
-			return ans;
+		return ans;
 	}
 
 }
